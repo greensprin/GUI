@@ -55,6 +55,13 @@ if __name__ == "__main__":
     runButton = ttk.Button(frame1, text="Run", command=clicked_run_button)
     runButton.grid(row=0, column=1)
 
+    # save,load button
+    saveButton = ttk.Button(frame1, text="save", command=clicked_run_button)
+    saveButton.grid(row=2, column=2)
+
+    loadButton = ttk.Button(frame1, text="load", command=clicked_run_button)
+    loadButton.grid(row=2, column=3)
+
     # Label
     label_value = tk.StringVar()
     label_value.set("select output dir")
