@@ -26,6 +26,9 @@ def clicked_delete_button():
     setting["Make Pattern"] = ""
     setting["Make Param"] = ""
 
+def clicked_check_button():
+    print(setting)
+
 def clicked_save_button():
     print("Save setting file")
     fTyp = [("", "*.pkl")]
@@ -92,6 +95,10 @@ if __name__ == "__main__":
     # 実行ボタン
     runButton = ttk.Button(frame1, text="Run", command=clicked_run_button)
     runButton.grid(row=0, column=1)
+
+    # check button
+    saveButton = ttk.Button(frame1, text="check", command=clicked_check_button)
+    saveButton.grid(row=0, column=2)
 
     # delete button
     saveButton = ttk.Button(frame1, text="delete", command=clicked_delete_button)
