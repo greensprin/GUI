@@ -12,7 +12,7 @@ def clicked_run_button():
     print("Run Start")
     state = v1.get()
     path  = entry.get()
-    if (state == "Run Sim"):
+    if   (state == "Run Sim"):
         print("Run Sim")
     elif (state == "Make Pattern"):
         print("Make Pattern")
@@ -22,9 +22,9 @@ def clicked_run_button():
 
 def clicked_delete_button():
     entry.delete(0, tk.END)
-    setting["Run Sim"] = ""
+    setting["Run Sim"]      = ""
     setting["Make Pattern"] = ""
-    setting["Make Param"] = ""
+    setting["Make Param"]   = ""
 
 def clicked_check_button():
     print(setting)
@@ -39,6 +39,7 @@ def clicked_save_button():
     print(setting)
 
 def clicked_load_button():
+    global setting
     print("Load setting file")
     fTyp = [("", "*.pkl")]
     iDir = os.path.abspath(os.path.dirname(__file__))
