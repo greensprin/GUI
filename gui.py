@@ -20,6 +20,12 @@ def clicked_run_button():
         print("Make Param")
     print("Run End")
 
+def clicked_delete_button():
+    entry.delete(0, tk.END)
+    setting["Run Sim"] = ""
+    setting["Make Pattern"] = ""
+    setting["Make Param"] = ""
+
 def clicked_save_button():
     print("Save setting file")
     fTyp = [("", "*.pkl")]
@@ -86,6 +92,10 @@ if __name__ == "__main__":
     # 実行ボタン
     runButton = ttk.Button(frame1, text="Run", command=clicked_run_button)
     runButton.grid(row=0, column=1)
+
+    # delete button
+    saveButton = ttk.Button(frame1, text="delete", command=clicked_delete_button)
+    saveButton.grid(row=0, column=3)
 
     # save button
     saveButton = ttk.Button(frame1, text="save", command=clicked_save_button)
