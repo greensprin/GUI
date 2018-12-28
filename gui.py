@@ -10,23 +10,16 @@ def clicked_run_button():
     print(entry.get())
 
 def clicked_sel_button(entry):
-    if (v1.get() == "Run Sim"):
-        fTyp = [("", "*")]
-        iDir = os.path.abspath(os.path.dirname(__file__))
-        if (entry.get() != ""):
-            iDir = entry.get()
-        dir = tkinter.filedialog.askdirectory(initialdir=iDir)
-        entry.delete(0, tk.END)
-        entry.insert(tk.END, dir)
-    else: # Make Pattern
-        fTyp = [("", "*")]
-        iDir = os.path.abspath(os.path.dirname(__file__))
-        if (entry.get() != ""):
-            iDir = entry.get()
-        file = tkinter.filedialog.askopenfilename(filetypes=fTyp, initialdir=iDir)
-        entry.delete(0, tk.END)
-        entry.insert(tk.END, file)
-
+    fTyp = [("", "*")]
+    iDir = os.path.abspath(os.path.dirname(__file__))
+    if (entry.get() != ""):
+        iDir = entry.get()
+    pull_down_elem = v1.get()
+    file_or_dir = ""
+    if (pull_down_elem == "Run Sim"): file_or_dir = tkinter.filedialog.askdirectory(initialdir=iDir)
+    else:                             file_or_dir = tkinter.filedialog.askopenfilename(filetypes=fTyp, initialdir=iDir)
+    entry.delete(0, tk.END)
+    entry.insert(tk.END, file_or_dir)
 
 def select_elem(event):
     # ファイル選択、フォルダ選択
@@ -73,7 +66,7 @@ if __name__ == "__main__":
     entry = tk.Entry(frame1)
     entry.grid(row=2, column=0)
 
-    fileSelectButton = ttk.Button(frame1, text="Sel", command=lambda arg1=entry:clicked_sel_button(arg1))
+    fileSelectButton = ttk.Button(frame1, text="Sel", command=lambda arg1=entry: clicked_sel_button(arg1))
     fileSelectButton.grid(row=2, column=1)
 
     tk.mainloop()
