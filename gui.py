@@ -10,8 +10,14 @@ setting = {"Run Sim":"", "Make Pattern":"", "Make Param":""}
 
 def clicked_run_button():
     print("Run Start")
-    print(v1.get())
-    print(entry.get())
+    state = v1.get()
+    path  = entry.get()
+    if (state == "Run Sim"):
+        print("Run Sim")
+    elif (state == "Make Pattern"):
+        print("Make Pattern")
+    else: # state == Make Param
+        print("Make Param")
     print("Run End")
 
 def clicked_save_button():
