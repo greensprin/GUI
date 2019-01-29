@@ -1,0 +1,63 @@
+	raw_in	flat_rt	dir4	lpf_blend_rt	lcb_gain	lcb_blend_rt	param	確認方法	確認できること	
+同位相	TOS2（縦線高周波）	0	-	-	-	-	hv_stripe_th = 7	中間dumpデータが、RefCと一致していることをdiffをとって確認する	ある程度実装が妥当であること	
+同位相	stripe	0	半分縦、半分横	-	-	-	hv_stripe_th = 7	中間dumpデータが、期待値通りの形をしているかを確認	同位相tapが行われており、補間係数も妥当	
+同位相		0		-	-	-	hv_stripe_th = 0			方向数設定の確認はどうするか
+同位相		0		-	-	-	hv_stripe_th = 9			方向数設定の確認はどうするか
+同位相	stripe	0.0/0.5/1.0	半分縦、半分横	-	-	-	hv_stripe_th = 7		完全非平坦部では、同位相tapが使われていないことを確認	
+同位相	stripe	0	半分A、半分D	-	-	-	hv_stripe_th = 7	斜め方向の補間がされていることを確認	斜め方向では、同位相tapは使われていない	
+G plane LCB	Inopla	-	-	-	DPC2Dからの入力	DPC2Dからの入力	-	中間dumpデータが、RefCと一致していることをdiffをとって確認する	ある程度実装が妥当であること	
+G plane LCB	RB 200 G 0	-	-	-	4分割	DPC2Dからの入力	-			
+G plane LCB LPF	Inopla	-	-	-	DPC2Dからの入力	All 1	-	LCBゲインをかけた後のG planeをdumpし、数か所選んで、机上計算で期待値作成する。G plane結果の値が期待値と一致していることを確認	LPFが正しくかけられていることを確認	
+G plane LCB LPF	1023/0	-	-	-	All 1	All 1	-	飽和レベル、0が保たれている	wrapしない、	0を入れると何が確かめられるか
+G plane （dir + lcb）Blend	Inopla	-	-	-	DPC2Dからの入力	DPC2Dからの入力	-	中間dumpデータが、RefCと一致していることをdiffをとって確認する。現像結果にアーティファクトが出ていないことを確認する	ある程度実装が妥当であること。機能により意図通りの効果を得られていること	
+G plane （dir + lcb）Blend	Inopla	-	-	-	DPC2Dからの入力	0/0.5/1.0	-	0の箇所はdir、1の場所はLCBであることを確認する。0.5の箇所に関しては、数か所を机上計算	意図通りblend率が使用されていることを確認	
+G plane （dir + lcb）Blend	All 1023/64/0	-	-	-	All 1	DPC2Dからの入力（Inopla）	-	1023の箇所は1023, 0の箇所は0、64の箇所は64	blendにより、飽和レベル,黒レベルが保たれていること	0を入れると何が確かめられるか
+mG_xtalk		-	4分割	-	-	-	mg_xtalk_level = 3	机上計算による期待値作成	全方向の補間がただしく行われている	入力画像はどうするか
+mG_xtalk		-	4分割	-	-	-	mg_xtalk_level = 0	机上計算による期待値作成	LPFの係数が正しくかけられている	入力画像はどうするか
+mG_xtalk		-	4分割	-	-	-	mg_xtalk_level = 7	机上計算による期待値作成	LPFの係数が正しくかけられている	入力画像はどうするか
+mG_xtalk	All 1023/64/0	-	4分割	-	-	-	mg_xtalk_level = 3	1023の箇所は1023, 0の箇所は0、64の箇所は64	blendにより、飽和レベル,黒レベルが保たれていること	
+mG_noxtalk		-	-	-	-	-	-	机上計算による期待値作成	LPFの係数が正しくかけられている	
+mG_noxtalk	All 1023/64/0	-	-	-	-	-	-	1023の箇所は1023, 0の箇所は0、64の箇所は64	飽和レベル,黒レベルが保たれていること	
+RGB_LPF	CZP＋文字	-	-	-	-	-	aliasing_en = 0 debug_mode 2	最終出力結果がRefCと一致	ある程度実装が妥当であること	入力画像はどうするか
+RGB_LPF	CZP＋文字	-	-	-	-	-	aliasing_en = 0 debug_mode 3	最終出力結果がRefCと一致	ある程度実装が妥当であること	入力画像はどうするか
+RGB_LPF	CZP＋文字	-	4分割	-	-	-	aliasing_en = 0 debug_mode 2	机上計算による期待値生成	全方向のG LPFが正しいことを確認	入力画像はどうするか
+RGB_LPF	CZP＋文字	-	4分割	-	-	-	aliasing_en = 0 debug_mode 3	机上計算による期待値生成	全方向のRB LPFが正しいことを確認	入力画像はどうするか
+RGB_LPF	All 1023/64/0	-	-	-	-	-	aliasing_en = 0 debug_mode 2	1023の箇所は1023, 0の箇所は0、64の箇所は64	飽和レベル,黒レベルが保たれていること	
+RGB_LPF	All 1023/64/0	-	-	-	-	-	aliasing_en = 0 debug_mode 3	1023の箇所は1023, 0の箇所は0、64の箇所は64	飽和レベル,黒レベルが保たれていること	
+偽色対策	CZP＋文字	-	-	All 0	-	-	debug_mode 2	偽色補正OFFと結果が一致するか		
+偽色対策	CZP＋文字	-	-	All 0	-	-	debug_mode 3	偽色補正OFFと結果が一致するか		
+偽色対策	CZP＋文字	-	-	-	-	-	aliasing_en = 1 debug_mode 2	最終出力結果がRefCと一致	ある程度実装が妥当であること	入力画像はどうするか
+偽色対策	CZP＋文字	-	-	-	-	-	aliasing_en = 1 debug_mode 3	最終出力結果がRefCと一致	ある程度実装が妥当であること	入力画像はどうするか
+偽色対策	All 1023/64/0	-	-	-	-	-	aliasing_en = 1 debug_mode 2	1023の箇所は1023, 0の箇所は0、64の箇所は64	飽和レベル,黒レベルが保たれていること	
+偽色対策	All 1023/64/0	-	-	-	-	-	aliasing_en = 1 debug_mode 3	1023の箇所は1023, 0の箇所は0、64の箇所は64	飽和レベル,黒レベルが保たれていること	
+偽色対策	CZP＋文字	-	-	-	-	-	aliasing_en = 1 debug_mode 2			
+偽色対策	CZP＋文字	-	-	-	-	-	aliasing_en = 1 debug_mode 3			
+high_freq_power	マクベスチャート	-	-	-	-	-	high_freq_power_en = 0 top = 1.0	high_freq_powerの中間dumpがすべて1023となっている	hfqがOFFとなり、平坦度に関わらず、topの値となっていることを確認	
+high_freq_power	マクベスチャート	-	-	-	-	-	-	RefCと現像結果、最終出力の同等性を確認		
+high_freq_power	マクベスチャート	-	-	-	-	-	Top = 1.0 btm = 1.0	hfqの中間dumpがすべて1.0となっている。また、現像結果で、ノイズが増している		
+high_freq_power	マクベスチャート	-	-	-	-	-	Top = 0.0 btm = 0.0	hfqの中間dumpがすべて0.0となっている。また、現像結果が、LPFよりの結果となっている		
+high_freq_power	マクベスチャート	0/0.5/1.0	-	-	-	-	-	平坦度によって、hfqの値が変化していることを中間dumpで確認。現像結果でも、平坦に近い判定箇所ほど、ノイズが少ないことを確認		
+high_freq_power	マクベスチャート	0/0.5/1.0	-	-	-	-	Th = ?, slope = *2	hfqの中間dumpを見て、0.5の箇所で、付加量が多くなっているか	th, slopeの設定が正しく反映されていることを確認	
+high_freq_power	マクベスチャート	0/0.5/1.0	-	-	-	-	Th = *2, slope = 1/2	hfqの中間dumpを見て、0.5の箇所で、付加量が少なくなっているか	th, slopeの設定が正しく反映されていることを確認	
+addReso	楔チャート	-	-	-	-	-	-	RefCの現像結果と比較、同等であることを差分で確認		
+addReso	楔チャート	-	-	-	-	-	addreso_en = 0	ONの時と比較し、解像度が付加されていないことを確認。また、alphaが0であることを確認	機能がOFFされていることを確認	
+addReso	楔チャート	0/0.5/1.0	-	-	-	-	flat_en = 0	平坦度が0.0以外の箇所でも解像度が負荷されていることを確認	平坦度によらず、全域に負荷されることを確認	
+addReso	楔チャート	0/0.5/1.0	-	-	-	-	flat_en = 1	平坦度が、0.0以外の箇所で、負荷量が0となっていることを確認	完全非兵站部のみ負荷されることを確認	
+addReso	楔チャート	-	-	-	-	-	add_reso_dir_num_th = max			以上のなか、よりおおきいなのかは確認
+addReso	楔チャート	-	-	-	-	-	add_reso_dir_num_th = min			以上のなか、よりおおきいなのかは確認
+addReso	楔チャート	-	-	-	-	-				振幅についてのパラメータ降りがしたい
+addReso	楔チャート	-	-	-	-	-				振幅についてのパラメータ降りがしたい
+addReso	楔チャート	-	-	-	-	-	Top = 1.0 btm = 1.0	減衰量がすべて1.0（減衰なし）となっている		
+addReso	楔チャート	-	-	-	-	-	Top = 0.0 btm = 0.0	減衰量がすべて0.0（全箇所減衰）となっている		
+addReso	楔チャート	-	-	-	1.0/4.0/8.0	-	Th = ?, slope = *2	減衰量が中間あたりで、０．０となっている		wb=1.0でゲインとの差分を計算しやすくする
+addReso	楔チャート	-	-	-	1.0/4.0/8.0	-	Th = *2, slope = 1/2	減衰量が中間あたりで、１．０となっている		wb=1.0でゲインとの差分を計算しやすくする
+addReso	楔チャート	-	-	-	-	-				場所によって、lcb_gainの値を変え、負荷量が変化していることを確認する。同じlcb_gainの箇所では、減衰量が一致していることを確認する
+addReso	楔チャート	-	-	-	-	-				
+addReso	楔チャート	-	-	-	-	-	Wb = max	減衰量が0.0		
+flare mode	Komorebi	-	-	-	-	-	flare mode _en = 1	RefCと現像結果、最終出力の同等性を確認		
+flare mode	自作画像	-	-	-	-	-	flare mode _en = 1	G planeを中間dumpして、意図通りとなっているか		
+flare mode	自作画像	-	-	-	-	-	flare mode _en = 1	最終binデータを見て、机上計算による期待値一致		
+1x1OCL 	TOS2							RefCと現像結果、最終出力の同等性を確認		
+無方向tap										
+広域計算										
+
